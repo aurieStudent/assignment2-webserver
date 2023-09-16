@@ -1,8 +1,8 @@
-import socket module
+# import socket module
 from socket import *
 # In order to terminate the program
 from signal import signal, SIGPIPE, SIG_DFL
-from io import BytesIO
+#from io import BytesIO
 signal(SIGPIPE,SIG_DFL)
 import sys
 
@@ -20,10 +20,10 @@ def webServer(port=13331):
     while True:
         # Establish the connection
 
-        #print('Ready to serve...')
+        print('Ready to serve...')
         connectionSocket, addr = serverSocket.accept()  ## Address is where are they coming from? Client socket is a socket object to send information to. #Fill in start -are you accepting connections?     #Fill in end
-        #print("Connection established from: ")
-        #print(addr)
+        print("Connection established from: ")
+        print(addr)
         #connectionSocket.send('Welcome to the server!\r\n'.encode())
         #connectionSocket.send('charset=utf-8\r\n'.encode())
         #connectionSocket.send('Content-Type: text/html\r\n'.encode())
@@ -36,12 +36,12 @@ def webServer(port=13331):
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-            f = open(filename[1:])  # fill in start #fill in end)
+            f = open(filename[1:])  # fill in start #fill in end
 
             # fill in end
 
-            outputdata = f.read()  #
-            #outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
+            #outputdata = f.read()  #
+            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -52,11 +52,17 @@ def webServer(port=13331):
             connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             #print(response.encode())
             connectionSocket.send(bytes("<html><head></head><body><h1>200 OK</h1></body></html>\r\n", "UTF-8"))
+
+            #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
+            #connectionSocket.send(response.decode())
+            #print(response.decode("utf-8"))
+            #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
+            #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
 
             # Send the content of the requested file to the client
             for i in range(0, len(outputdata)):
-                connectionSocket.send(outputdata[i].encode())  # for line in file
+                connectionSocket.send(bytes(outputdata[i]))  # for line in file
                 # Fill in start - send your html file contents #Fill in end
             connectionSocket.close()  # closing the connection socket
 
@@ -67,13 +73,15 @@ def webServer(port=13331):
             #print(message.decode("HTTP/1.1 404 Not Found"))
             response = 'HTTP/1.1 404 Not Found'
             print(response.encode("utf-8"))
+            #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
+            #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
 
             # Close client socket
             # Fill in start
             connectionSocket.close()
             # Fill in end
-        except (BrokenPipeError, IOError):
+        except BrokenPipeError:
             print('BrokenPipeError caught')
 
 
@@ -81,3 +89,5 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
+    #app.run(host='127.0.0.1', port=13331)
+
