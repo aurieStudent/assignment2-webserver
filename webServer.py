@@ -42,7 +42,7 @@ def webServer(port=13331):
             # fill in end
 
             #outputdata = f.read()  #
-            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n", data.encode("utf-8")
+            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"#, data.encode("utf-8")
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -66,10 +66,15 @@ def webServer(port=13331):
 
             # Send the content of the requested file to the client
 
-
+            #connectionSocket.send(bytes(i.encode("utf-8")))
+            connectionSocket.send(bytes(data.encode("utf-8")))
+            #connectionSocket.send(bytes(outputdata.encode("utf-8")))
 
             for i in range(0, len(outputdata)):
                 connectionSocket.send(bytes(outputdata[i]))
+
+
+
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
             connectionSocket.close()  # closing the connection socket
@@ -79,8 +84,8 @@ def webServer(port=13331):
             # Remember the format you used in the try: block!
             # Fill in start
             #print(message.decode("HTTP/1.1 404 Not Found"))
-            response = 'HTTP/1.1 404 Not Found'
-            print(response.encode("utf-8"))
+            connectionSocket.send(bytes("HTTP/1.1 404 Not Found\r\n\r\n", "UTF-8"))
+            connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
