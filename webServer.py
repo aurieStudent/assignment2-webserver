@@ -71,8 +71,11 @@ def webServer(port=13331):
             # Remember the format you used in the try: block!
             # Fill in start
             #print(message.decode("HTTP/1.1 404 Not Found"))
-            response = 'HTTP/1.1 404 Not Found'
-            print(response.encode("utf-8"))
+            connectionSocket.send(bytes("HTTP/1.1 404 Not Found\r\n\r\n", "UTF-8"))
+            connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
+            #response = 'HTTP/1.1 404 Not Found'
+            #connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
+            #print(response.encode("utf-8"))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
@@ -89,5 +92,4 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
-    #app.run(host='127.0.0.1', port=13331)
 
