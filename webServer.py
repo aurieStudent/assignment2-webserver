@@ -84,4 +84,9 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
+
+
+
+if __name__ == "__main__":
+    webServer(13331)
     #app.run(host='127.0.0.1', port=13331)
