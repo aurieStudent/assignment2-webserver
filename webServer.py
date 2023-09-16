@@ -52,12 +52,6 @@ def webServer(port=13331):
             connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             #print(response.encode())
             connectionSocket.send(bytes("<html><head></head><body><h1>200 OK</h1></body></html>\r\n", "UTF-8"))
-
-            #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
-            #connectionSocket.send(response.decode())
-            #print(response.decode("utf-8"))
-            #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
-            #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
 
             # Send the content of the requested file to the client
@@ -73,9 +67,6 @@ def webServer(port=13331):
             #print(message.decode("HTTP/1.1 404 Not Found"))
             response = 'HTTP/1.1 404 Not Found'
             print(response.encode("utf-8"))
-            connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
-            #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
-            #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
 
             # Close client socket
