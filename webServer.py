@@ -23,7 +23,10 @@ def webServer(port=13331):
         connectionSocket, addr = serverSocket.accept()  ## Address is where are they coming from? Client socket is a socket object to send information to. #Fill in start -are you accepting connections?     #Fill in end
         print("Connection established from: ")
         print(addr)
-        connectionSocket.send(bytes("Welcome to the server!", "utf-8", "Content-Type: text/html"))
+        connectionSocket.send('Welcome to the server!\r\n'.encode())
+        connectionSocket.send('charset=utf-8\r\n'.encode())
+        connectionSocket.send('Content-Type: text/html\r\n'.encode())
+       
         try:
             message = connectionSocket.recv(1024)  # Buffer size to receive packets #Fill in start -a client is sending you a message   #Fill in end
             filename = message.split()[1]
