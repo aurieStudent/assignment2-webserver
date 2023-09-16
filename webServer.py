@@ -25,8 +25,7 @@ def webServer(port=13331):
         print(addr)
         connectionSocket.send(bytes("Welcome to the server!", "utf-8"))
         try:
-            message = connectionSocket.recv(
-                1024)  # Buffer size to receive packets #Fill in start -a client is sending you a message   #Fill in end
+            message = connectionSocket.recv(1024)  # Buffer size to receive packets #Fill in start -a client is sending you a message   #Fill in end
             filename = message.split()[1]
 
             # opens the client requested file.
@@ -35,8 +34,8 @@ def webServer(port=13331):
 
             # fill in end
 
-            #outputdata = f.read()  #
-            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
+            outputdata = f.read()  #
+            #outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
