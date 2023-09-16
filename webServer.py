@@ -2,6 +2,7 @@
 from socket import *
 # In order to terminate the program
 from signal import signal, SIGPIPE, SIG_DFL
+from io import BytesIO
 signal(SIGPIPE,SIG_DFL)
 import sys
 
@@ -23,12 +24,14 @@ def webServer(port=13331):
         connectionSocket, addr = serverSocket.accept()  ## Address is where are they coming from? Client socket is a socket object to send information to. #Fill in start -are you accepting connections?     #Fill in end
         print("Connection established from: ")
         print(addr)
-        connectionSocket.send('Welcome to the server!\r\n'.encode())
-        connectionSocket.send('charset=utf-8\r\n'.encode())
-        connectionSocket.send('Content-Type: text/html\r\n'.encode())
-       
+        #connectionSocket.send('Welcome to the server!\r\n'.encode())
+        #connectionSocket.send('charset=utf-8\r\n'.encode())
+        #connectionSocket.send('Content-Type: text/html\r\n'.encode())
+
         try:
             message = connectionSocket.recv(1024)  # Buffer size to receive packets #Fill in start -a client is sending you a message   #Fill in end
+            print(message.decode("utf-8"))
+            print("Welcome to the server!")
             filename = message.split()[1]
 
             # opens the client requested file.
@@ -38,7 +41,7 @@ def webServer(port=13331):
             # fill in end
 
             outputdata = f.read()  #
-            #outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
+            #outputdata = b'Content-Type: text/html; charset=UTF-8\r\n
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -46,7 +49,7 @@ def webServer(port=13331):
             # Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok?
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
-            connectionSocket.send('HTTP 1.1/ 200 OK\r\n'.encode())
+            connectionSocket.send('HTTP 1.1/ 200 OK'.encode())
             # Fill in end
 
             # Send the content of the requested file to the client
@@ -59,7 +62,7 @@ def webServer(port=13331):
             # Send response message for invalid request due to the file not being found (404)
             # Remember the format you used in the try: block!
             # Fill in start
-            connectionSocket.send('HTTP/1.1 404 Not Found\r\n'.encode())
+            connectionSocket.send('HTTP/1.1 404 Not Found'.encode())
             # Fill in end
 
             # Close client socket
@@ -72,7 +75,6 @@ def webServer(port=13331):
 
 
 
-
 if __name__ == "__main__":
     webServer(13331)
-    app.run(host='127.0.0.1', port=13331)
+    #app.run(host='127.0.0.1', port=13331)
