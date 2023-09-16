@@ -1,4 +1,4 @@
-# import socket module
+import socket module
 from socket import *
 # In order to terminate the program
 from signal import signal, SIGPIPE, SIG_DFL
@@ -49,8 +49,13 @@ def webServer(port=13331):
             # Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok?
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
-            response = 'HTTP/1.1 200 OK'
-            print(response.encode("utf-8"))
+            connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
+            #print(response.encode())
+            connectionSocket.send(bytes("<html><head></head><body><h1>200 OK</h1></body></html>\r\n", "UTF-8"))
+
+            #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
+            #connectionSocket.send(response.decode())
+            #print(response.decode("utf-8"))
             #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
@@ -68,6 +73,7 @@ def webServer(port=13331):
             #print(message.decode("HTTP/1.1 404 Not Found"))
             response = 'HTTP/1.1 404 Not Found'
             print(response.encode("utf-8"))
+            connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
@@ -84,9 +90,3 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
-
-
-
-if __name__ == "__main__":
-    webServer(13331)
-    #app.run(host='127.0.0.1', port=13331)
