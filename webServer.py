@@ -36,13 +36,13 @@ def webServer(port=13331):
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-            f = open(filename[1:])  # fill in start
-            data = f.read()# #fill in end
+            f = open(filename[1:])
+            data = f.read()# fill in start #fill in end
 
             # fill in end
 
             #outputdata = f.read()  #
-            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"#, data.encode("utf-8")
+            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -51,11 +51,8 @@ def webServer(port=13331):
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
             connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
-            #print(f)
-
             #print(response.encode())
             connectionSocket.send(bytes("<html><head></head><body><h1>200 OK</h1></body></html>\r\n", "UTF-8"))
-
 
             #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
             #connectionSocket.send(response.decode())
@@ -63,18 +60,11 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
-
-            # Send the content of the requested file to the client
-
-            #connectionSocket.send(bytes(i.encode("utf-8")))
             connectionSocket.send(bytes(data.encode("utf-8")))
-            #connectionSocket.send(bytes(outputdata.encode("utf-8")))
-
-            for i in range(0, len(outputdata)):
-                connectionSocket.send(bytes(outputdata[i]))
-
-
-
+            # Send the content of the requested file to the client
+            for i in f:
+                connectionSocket.send(outputdata.encode("utf-8"))
+                print(i)
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
             connectionSocket.close()  # closing the connection socket
@@ -86,6 +76,9 @@ def webServer(port=13331):
             #print(message.decode("HTTP/1.1 404 Not Found"))
             connectionSocket.send(bytes("HTTP/1.1 404 Not Found\r\n\r\n", "UTF-8"))
             connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
+            #response = 'HTTP/1.1 404 Not Found'
+            #connectionSocket.send(bytes("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n", "UTF-8"))
+            #print(response.encode("utf-8"))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found Content-Type: text/html\n\n'))
             #connectionSocket.send(bytes('HTTP/1.1 404 Not Found\r\n\r\n'.encode()))
             # Fill in end
@@ -102,3 +95,4 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
+
