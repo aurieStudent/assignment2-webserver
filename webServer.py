@@ -37,7 +37,8 @@ def webServer(port=13331):
 
 
             #print("Welcome to the server!")
-            filename = message.split()[1]
+            #filename = message.split()[1]
+            filename = message
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
