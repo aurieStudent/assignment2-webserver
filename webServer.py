@@ -72,15 +72,15 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
             connectionSocket.send(bytes(data.encode("utf-8")))
-            connectionSocket.send(bytes(outputdata))
-            connectionSocket.send(bytes(outputdata2))
-            connectionSocket.send(bytes(outputdata3))
+            #connectionSocket.send(bytes(outputdata))
+            #connectionSocket.send(bytes(outputdata2))
+            #connectionSocket.send(bytes(outputdata3))
             # Send the content of the requested file to the client
             
                 
             connectionSocket.send(message)
+            connectionSocket.send(filename)
             #connectionSocket.send(message.encode()
-            connectionSocket.send("\r\n".encode())
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
             connectionSocket.close()  # closing the connection socket
