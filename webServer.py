@@ -79,7 +79,7 @@ def webServer(port=13331):
             
                 
             connectionSocket.send(data.encode()
-            connectionSocket.send(message.encode()
+            #connectionSocket.send(message.encode()
             connectionSocket.send("\r\n".encode())
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
