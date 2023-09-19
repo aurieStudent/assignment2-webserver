@@ -76,7 +76,7 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
-            connectionSocket.send(bytes(data,"UTF-8"))
+            connectionSocket.send(bytes(data,"\r\n\r\n","UTF-8"))
             connectionSocket.send(bytes(outputdata))
             connectionSocket.send(bytes(outputdata2))
             connectionSocket.send(bytes(outputdata3))
