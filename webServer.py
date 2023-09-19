@@ -20,10 +20,10 @@ def webServer(port=13331):
     while True:
         # Establish the connection
 
-        #print('Ready to serve...')
+        print('Ready to serve...')
         connectionSocket, addr = serverSocket.accept()  ## Address is where are they coming from? Client socket is a socket object to send information to. #Fill in start -are you accepting connections?     #Fill in end
-        #print("Connection established from: ")
-        #print(addr)
+        print("Connection established from: ")
+        print(addr)
         #connectionSocket.send('Welcome to the server!\r\n'.encode())
         #connectionSocket.send('charset=utf-8\r\n'.encode())
         #connectionSocket.send('Content-Type: text/html\r\n'.encode())
@@ -38,13 +38,18 @@ def webServer(port=13331):
 
             #print("Welcome to the server!")
             filename = message.split()[1]
-            #filename = message
 
             # opens the client requested file.
             # Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
             f = open(filename[1:])
 
             data = f.read()# fill in start #fill in end
+
+            print("This is the data field: ")
+            print(data)
+
+            print("This is the message field: ")
+            print(message)
 
 
             # fill in end
@@ -63,7 +68,7 @@ def webServer(port=13331):
 
             connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             #print(response.encode())
-            connectionSocket.send(bytes("<html><head></head><body><h1>200 OK</h1></body></html>\r\n", "UTF-8"))
+            connectionSocket.send(bytes("<html><head></head><body><h1> 200 OK </h1></body></html>\r\n", "UTF-8"))
 
             #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
             #connectionSocket.send(response.decode())
@@ -71,19 +76,15 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
-            connectionSocket.send(bytes(data.encode("utf-8")))
-            #connectionSocket.send(bytes(outputdata))
-            #connectionSocket.send(bytes(outputdata2))
-            #connectionSocket.send(bytes(outputdata3))
+            connectionSocket.send(bytes(data,"UTF-8"))
+            connectionSocket.send(bytes(outputdata))
+            connectionSocket.send(bytes(outputdata2))
+            connectionSocket.send(bytes(outputdata3))
             # Send the content of the requested file to the client
             
-                
-            connectionSocket.send(message)
-            connectionSocket.send(filename)
-            #connectionSocket.send(message.encode()
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
-            connectionSocket.close()  # closing the connection socket
+            #connectionSocket.close()  # closing the connection socket
 
         except IOError:
             # Send response message for invalid request due to the file not being found (404)
