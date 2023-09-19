@@ -45,11 +45,11 @@ def webServer(port=13331):
 
             data = f.read()# fill in start #fill in end
 
-            print("This is the data field: ")
-            print(data)
+            #print("This is the data field: ")
+            #print(data)
 
-            print("This is the message field: ")
-            print(message)
+            #print("This is the message field: ")
+            #print(message)
 
 
             # fill in end
@@ -81,7 +81,7 @@ def webServer(port=13331):
             connectionSocket.send(bytes(outputdata2))
             connectionSocket.send(bytes(outputdata3))
             # Send the content of the requested file to the client
-            
+
                 # for line in file
                 # Fill in start - send your html file contents #Fill in end
             #connectionSocket.close()  # closing the connection socket
