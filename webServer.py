@@ -55,9 +55,9 @@ def webServer(port=13331):
             # fill in end
 
             #outputdata = f.read()  #
-            outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
-            outputdata2 = b"Server: Apache/2.4.1 (Unix); charset=UTF-8\r\n"
-            outputdata3 = b"Connection: keep-alive; charset=UTF-8\r\n"
+            outputdata = "Content-Type: text/html;\r\n"
+            outputdata2 = "Server: Apache/2.4.1 (Unix);\r\n"
+            outputdata3 = "Connection: keep-alive;\r\n"
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -77,10 +77,10 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
             connectionSocket.send(bytes(data,"UTF-8"))
-            connectionSocket.send(bytes(filename,"UTF-8"))
-            connectionSocket.send(bytes(outputdata))
-            connectionSocket.send(bytes(outputdata2))
-            connectionSocket.send(bytes(outputdata3))
+            connectionSocket.send(bytes(outputdata,"UTF-8" ))
+            connectionSocket.send(bytes(outputdata2,"UTF-8"))
+            connectionSocket.send(bytes(outputdata3,"UTF-8"))
+            connectionSocket.send(bytes(message))
             # Send the content of the requested file to the client
 
                 # for line in file
