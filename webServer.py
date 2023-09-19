@@ -45,11 +45,11 @@ def webServer(port=13331):
 
             data = f.read()# fill in start #fill in end
 
-            #print("This is the data field: ")
-            #print(data)
+            print("This is the data field: ")
+            print(data)
 
-            #print("This is the message field: ")
-            #print(message)
+            print("This is the message field: ")
+            print(message)
 
 
             # fill in end
@@ -66,9 +66,9 @@ def webServer(port=13331):
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
 
-            connectionSocket.send(bytes("HTTP/1.1 200 OK", "UTF-8"))
+            connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             #print(response.encode())
-            connectionSocket.send(bytes("<html><head></head><body><h1> 200 OK </h1></body></html>", "UTF-8"))
+            connectionSocket.send(bytes("<html><head></head><body><h1> 200 OK </h1></body></html>\r\n\r\n", "UTF-8"))
 
             #response = 'HTTP/1.1 200 OK\nConnection: close\n\n' + outputdata
             #connectionSocket.send(response.decode())
@@ -77,6 +77,7 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
             connectionSocket.send(bytes(data,"UTF-8"))
+            connectionSocket.send(bytes(filename,"UTF-8"))
             connectionSocket.send(bytes(outputdata))
             connectionSocket.send(bytes(outputdata2))
             connectionSocket.send(bytes(outputdata3))
@@ -112,3 +113,4 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
     webServer(13331)
+
