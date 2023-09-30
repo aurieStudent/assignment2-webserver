@@ -53,7 +53,10 @@ def webServer(port=13331):
             outputdata = b"Content-Type: text/html;\r\n"
             outputdata2 = b"Server: Apache/2.4.1 (Unix);\r\n"
             outputdata3 = b"Connection: keep-alive;\r\n"
-            outputdataCombined = outputdata + outputdata2 + outputdata3
+            twohundredResponse = b"HTTP/1.1 200 OK\r\n\r\n"
+            outputdataCombined = twohundredResponse + outputdata + outputdata2 + outputdata3
+
+
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
             # Content-Type above is an example on how to send a header as bytes. There are more!
             # Fill in end
@@ -62,7 +65,7 @@ def webServer(port=13331):
             # Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
             # Fill in start
 
-            connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
+            #connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             #print(response.encode())
             #connectionSocket.send(bytes("<html><head></head><body><h1> 200 OK </h1></body></html>\r\n\r\n", "UTF-8"))
             #connectionSocket.send(bytes("GET /helloworld.html HTTP/1.1 \r\nHost: 127.0.0.1:13331 \r\nConnection: keep-alive \r\nCache-Control: max-age=0 \r\nsec-ch-ua: Chromium  Not A;Brand Google Chrome v=116 \r\nsec-ch-ua-mobile: ?0\r\nsec-ch-ua-platform: macOS\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\r\nSec-Fetch-Site: none\r\nSec-Fetch-Mode: navigate\r\nSec-Fetch-User: ?1\r\nSec-Fetch-Dest: document\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: en-US,en;q=0.9\r\n\r\n", "UTF-8"))
