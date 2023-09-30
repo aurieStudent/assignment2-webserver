@@ -87,11 +87,11 @@ def webServer(port=13331):
 
             combined = message + data2
 
-            #connectionSocket.send(combined)
+            connectionSocket.send(combined)
 
 
 
-            connectionSocket.send(bytes(combined2, "UTF-8"))
+            #connectionSocket.send(bytes(combined2, "UTF-8"))
             # Send the content of the requested file to the client
 
                 # for line in file
