@@ -1,3 +1,4 @@
+
 # import socket module
 from socket import *
 # In order to terminate the program
@@ -77,7 +78,7 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1\n\n 200 OK Content-Type: text/html'))
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
-            connectionSocket.send(bytes(data, "UTF-8"))
+            connectionSocket.send(bytes(data,"UTF-8"))
             connectionSocket.send(bytes(outputdata,"UTF-8" ))
             connectionSocket.send(bytes(outputdata2,"UTF-8"))
             connectionSocket.send(bytes(outputdata3,"UTF-8"))
@@ -106,6 +107,8 @@ def webServer(port=13331):
             # Fill in start
             connectionSocket.close()
             # Fill in end
+        except BrokenPipeError:
+            print('BrokenPipeError caught')
 
 
 
