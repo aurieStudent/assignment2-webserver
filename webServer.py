@@ -50,11 +50,15 @@ def webServer(port=13331):
             # fill in end
 
             #outputdata = f.read()  #
-            outputdata = b"Content-Type: text/html;\r\n"
+            outputdata = b"Content-Type: text/html\r\n"
             outputdata2 = b"Server: Apache/2.4.1 (Unix);\r\n"
-            outputdata3 = b"Connection: keep-alive;\r\n"
-            twohundredResponse = b"HTTP/1.1 200 OK\r\n\r\n"
-            outputdataCombined = twohundredResponse + outputdata + outputdata2 + outputdata3
+            outputdata3 = b"Connection: keep-alive;\r\n\r\n"
+            twoHundredResponse = b"HTTP/1.1 200 OK\r\n"
+
+            outputdataCombined = twoHundredResponse + outputdata + outputdata2 + outputdata3
+
+            print("This is the combined output data: ")
+            print(outputdataCombined)
 
 
             # Fill in start -This variable can store your headers you want to send for any valid or invalid request.
@@ -82,8 +86,10 @@ def webServer(port=13331):
             #connectionSocket.send(bytes(outputdata3,"UTF-8"))
             data2 = data.encode()
 
-            combined = data2 + outputdataCombined
+            combined = outputdataCombined + data2
+            #connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
             connectionSocket.send(combined)
+            #connectionSocket.send('HTTP/1.1 200 OK \n'.encode() + combined)
             # Send the content of the requested file to the client
 
                 # for line in file
