@@ -72,9 +72,9 @@ def webServer(port=13331):
             #connectionSocket.send(bytes('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'))
             # Fill in end
             #connectionSocket.send(bytes(data, "UTF-8"))
-            connectionSocket.send(bytes(outputdata,"UTF-8" ))
-            connectionSocket.send(bytes(outputdata2,"UTF-8"))
-            connectionSocket.send(bytes(outputdata3,"UTF-8"))
+            #connectionSocket.send(bytes(outputdata,"UTF-8" ))
+            #connectionSocket.send(bytes(outputdata2,"UTF-8"))
+            #connectionSocket.send(bytes(outputdata3,"UTF-8"))
             data2 = data.encode()
 
             combined = message + data2
