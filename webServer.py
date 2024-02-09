@@ -7,6 +7,8 @@ from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE,SIG_DFL)
 import sys
 
+ #This is Aurielle I am taking this course again and have approval to reuse this code.
+
 
 def webServer(port=13331):
     serverSocket = socket(AF_INET, SOCK_STREAM)
